@@ -8,7 +8,7 @@ sometime, you want to access the MVS tree structure, to do so, you have to
 use a FTP client that supports z/OS FTP server.
 
 I have done this emulator because I have added z/OS support to NppFTP (a
-plugin of Notepad++) but the maintener couldn't test the patch. With this
+plugin of Notepad++) but the maintainer couldn't test the patch. With this
 emulator, he can test it and improve it.
 
 ## How to use it
