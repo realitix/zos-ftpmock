@@ -257,6 +257,7 @@ class ZOSHandler(FTPHandler):
         self.respond('257 "%s" is the current directory.' % cwd)
 
     def ftp_RETR(self, path):
+        # This is not required for GDG
         #path = self.zos_absolute(path)
         print("RETR "+path)
         return super().ftp_RETR(path)
