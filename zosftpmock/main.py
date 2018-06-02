@@ -172,6 +172,7 @@ class ZOSFS(AbstractedFS):
     def format_list_in_pds(self, zroot, pds, listing):
         # Send head
         head = "Name VV.MM Created Changed Size Init Mod Id\r\n"
+        head = "Volume Unit Referred Ext Used Recfm Lrecl BlkSz Dsorg Dsname\r\n"  # noqa
         yield head.encode('utf8', self.cmd_channel.unicode_errors)
 
         # Send list
@@ -190,6 +191,21 @@ class ZOSFS(AbstractedFS):
 
             line = '{} {} {} {} {} {} {} {}\r\n'.format(
                 name, vvmm, created, changed, size, init, mod, zid)
+
+            # GDG 
+            volume = "H19761"
+            unit = "Tape"
+            referred = ""
+            ext = ""
+            used = ""
+            recfm = ''
+            lrecl = ''
+            blksz = ""
+            sorg = ""
+            dsname = basename
+            line = '{} {} {} {} {} {} {} {} {} {}\r\n'.format(
+                volume, unit, referred, ext, used, recfm,
+                lrecl, blksz, sorg, dsname)
             yield line.encode('utf8', self.cmd_channel.unicode_errors)
 
     def format_list(self, basedir, listing, ignore_err=True):
@@ -241,12 +257,16 @@ class ZOSHandler(FTPHandler):
         self.respond('257 "%s" is the current directory.' % cwd)
 
     def ftp_RETR(self, path):
-        path = self.zos_absolute(path)
+        #path = self.zos_absolute(path)
+        print("RETR "+path)
         return super().ftp_RETR(path)
 
     def ftp_STOR(self, path, mode='w'):
         path = self.zos_absolute(path)
         return super().ftp_STOR(path, mode)
+
+    def ftp_TYPE(self, line):
+        return super().ftp_TYPE(line)
 
 
 def main():
