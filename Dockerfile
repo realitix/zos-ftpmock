@@ -7,5 +7,5 @@ RUN python3 setup.py install
 WORKDIR example
 EXPOSE 2121/udp
 EXPOSE 2121/tcp
-EXPOSE 60000-65535
+EXPOSE 60000-60009
 CMD ["zosftp","&"]
