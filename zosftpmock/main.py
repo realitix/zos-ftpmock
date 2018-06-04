@@ -280,6 +280,7 @@ def main():
     handler.banner = "z/OS FTP Emulator by realitix"
     handler.abstracted_fs = ZOSFS
     handler.proto_cmds = proto_cmds
+    handler.passive_ports = range(60000,65535)
 
     address = ('', 2121)
     server = FTPServer(address, handler)
