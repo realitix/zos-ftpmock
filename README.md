@@ -21,3 +21,16 @@ emulator, he can test it and improve it.
 You have now a FTP server listening on port 2121.
 
 To test it, in your FTP client, use 'TSODIQ1' as base path (with the quote).
+
+For GDG, use 'TSODIQ1.GDGTEXT' and 'TSODIQ1.FOLDER'.
+
+For Sequential Datasets, use 'TSODIQ1.FOLDER.FOLDERTXT'
+
+## To build this into a Docker container
+docker build -t <tag> .
+
+## To run Docker container
+docker run -p 2121:2121 -p 60000-60009:60000-60009 --rm <tag>
+
+Now you can FTP to localhost:2121 to get to the FTP server inside the container.
+
